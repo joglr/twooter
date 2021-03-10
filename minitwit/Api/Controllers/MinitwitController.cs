@@ -156,11 +156,11 @@ namespace Controllers
             var res = await UserRepo.FollowAsync(user.username, username);
 
             if (res != 0) return BadRequest();
-            return Ok();
+            return Redirect("/public");
         }
 
         // Attemps to unfollow a user
-        [HttpDelete("{username}/unfollow")]
+        [HttpPost("{username}/unfollow")]
         public async Task<IActionResult> UnfollowUserAsync([FromRoute] string username)
         {
             await CheckSessionForUser();
@@ -169,7 +169,7 @@ namespace Controllers
 
             if (res == -3) return (ActionResult)await Get404Page();
             if (res != 0) return BadRequest();
-            return Ok();
+            return Redirect("/public");
         }
 
         // Displays all messages

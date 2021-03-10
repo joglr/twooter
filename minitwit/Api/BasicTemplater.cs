@@ -129,12 +129,13 @@ namespace Api
               <small>
                 {reformattedDateTime}
               </small>
-            </p>
-          </li>");
-          // if (loggedin)
-          // {
-          //   sb.Append($"<form method=post action={msg.author.username}/follow><button type=submit>Follow</button></form>");
-          // }
+            </p>");
+          if (loggedin)
+          {
+            if (user.following.Contains(msg.author.username)) sb.Append($"<form method=post action={msg.author.username}/unfollow><button type=submit>Unfollow</button></form>");
+            else if (user.username != msg.author.username) sb.Append($"<form method=post action={msg.author.username}/follow><button type=submit>Follow</button></form>");
+          }
+          sb.Append("</li>");
         }
         sb.Append("</ul>");
       }
